@@ -1,0 +1,132 @@
+{
+  "name": "vscode-translator",
+  "displayName": "vscode-translator",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "ztl(LoongZ)",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "homepage": "",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "icon": "images/icon.png",
+  "activationEvents": [
+    "onCommand:extension.sayHello"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "vscode-translator",
+      "properties": {
+        "vscode-translator.port": {
+          "type": "number",
+          "default": 21818,
+          "description": "服务端口"
+        },
+        "vscode-translator.open": {
+          "type": "boolean",
+          "default": true,
+          "description": "服务开关"
+        },
+        "vscode-translator.tt": {
+          "type": "object",
+          "default": {
+            "a": 1
+          },
+          "description": "服务"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "vscode-translator.helloWorld",
+        "title": "helloWorld"
+      },
+      {
+        "command": "vscode-translator.getComment",
+        "title": "getComment"
+      },
+      {
+        "command": "vscode-translator.getCurrentFilePath",
+        "title": "getCurrentFilePath"
+      }
+    ],
+    "keybindings": [],
+    "menus": {
+      "explorer/context": [
+        {
+          "group": "navigation",
+          "command": "vscode-translator.getCurrentFilePath"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "editorFocus",
+          "group": "navigation",
+          "command": "vscode-translator.getCurrentFilePath"
+        }
+      ],
+      "editor/title": [
+        {
+          "group": "navigation",
+          "when": "resourceLangId == markdown",
+          "command": "vscode-translator.helloWorld",
+          "alt": "vscode-translator.helloWorld"
+        }
+      ],
+      "editor/title/context": []
+    },
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/javascript.json"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": []
+    },
+    "views": {
+      "beautifulGirl": []
+    },
+    "iconThemes": []
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.89.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.8"
+  }
+}
