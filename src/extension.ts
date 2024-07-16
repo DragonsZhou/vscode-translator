@@ -3,15 +3,12 @@
 import * as vscode from 'vscode';
 
 import { registerCommands } from "./command/RegisterCommand"
-import { Il8n, getIl8n } from "./il8n/Il8n"
 
 
 // 激活扩展时调用此方法
 // 首次执行命令时，扩展将被激活
 export function activate(context: vscode.ExtensionContext) {
 	registerCommands(context)
-	let il8n: Il8n = getIl8n(context)
-	console.log(il8n.format<string>("a"));
 }
 
 

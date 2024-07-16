@@ -10,7 +10,7 @@ interface ITextMap {
 //国际化
 export class Il8n {
 
-  private localesTextMap: { [locale: string]: ITextMap } = {};
+  private localesTextMap: { [locales: string]: ITextMap } = {};
   private currentTextMap: ITextMap = {};
 
   //注册国际化

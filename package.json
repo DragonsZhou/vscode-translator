@@ -3,7 +3,7 @@
   "displayName": "vscode-translator",
   "description": "",
   "version": "0.0.1",
-  "publisher": "ztl(LoongZ)",
+  "publisher": "LoongZ",
   "engines": {
     "vscode": "^1.89.0"
   },
@@ -19,11 +19,11 @@
   "bugs": {
     "url": ""
   },
+  "main": "./dist/extension.js",
   "icon": "images/icon.png",
   "activationEvents": [
-    "onCommand:extension.sayHello"
+    "onCommand:vscode-translator.sayHello"
   ],
-  "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -50,16 +50,29 @@
     },
     "commands": [
       {
-        "command": "vscode-translator.helloWorld",
-        "title": "helloWorld"
+        "command": "vscode-translator.testCommand",
+        "title": "testCommand",
+        "category": "vscode-translator-test"
       },
       {
-        "command": "vscode-translator.getComment",
-        "title": "getComment"
+        "command": "vscode-translator.testWebView",
+        "title": "testWebView",
+        "category": "vscode-translator-test"
       },
       {
-        "command": "vscode-translator.getCurrentFilePath",
-        "title": "getCurrentFilePath"
+        "command": "vscode-translator.testMenus",
+        "title": "testMenus",
+        "category": "vscode-translator-test"
+      },
+      {
+        "command": "vscode-translator.testEditorCommand",
+        "title": "testEditorCommand",
+        "category": "vscode-translator-test"
+      },
+      {
+        "command": "vscode-translator.getSelectedText",
+        "title": "getSelectedText",
+        "category": "vscode-translator"
       }
     ],
     "keybindings": [],
@@ -67,22 +80,22 @@
       "explorer/context": [
         {
           "group": "navigation",
-          "command": "vscode-translator.getCurrentFilePath"
+          "command": "vscode-translator.testMenus"
         }
       ],
       "editor/context": [
         {
-          "when": "editorFocus",
           "group": "navigation",
-          "command": "vscode-translator.getCurrentFilePath"
+          "command": "vscode-translator.testMenus",
+          "when": "editorFocus"
         }
       ],
       "editor/title": [
         {
-          "group": "navigation",
-          "when": "resourceLangId == markdown",
-          "command": "vscode-translator.helloWorld",
-          "alt": "vscode-translator.helloWorld"
+          "group": "",
+          "when": "1",
+          "command": "test",
+          "alt": ""
         }
       ],
       "editor/title/context": []

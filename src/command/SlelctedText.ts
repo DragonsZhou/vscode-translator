@@ -1,7 +1,20 @@
+
 import * as vscode from 'vscode';
 import { outputChannelInstance } from '../log/ChannelLogger';
 
-
+export function getSelectedText(...args: any[]): string {
+    let textEditor = vscode.window.activeTextEditor//获取当前激活的编辑框的实例
+    let start = textEditor?.selection.start;
+    let end = textEditor?.selection.end;
+    let selectedText: string = ""
+    if (start && end) {
+        let selectRange = new vscode.Range(start, end)
+        selectedText = textEditor?.document.getText(selectRange) ?
+            textEditor?.document.getText(selectRange) : "";
+    }
+    outputChannelInstance.info(["已经选取的文本：", selectedText])
+    return selectedText
+}
 // // 获取注释
 // const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
 // if (editor) {
@@ -16,6 +29,9 @@ import { outputChannelInstance } from '../log/ChannelLogger';
 //     outputChannelInstance.info(textArray.join(" "));
 //     // editor.action.blockComment  注释命令
 // }
+
+
+
 
 export function comment() {
     let editor = vscode.window.activeTextEditor;
