@@ -50,26 +50,6 @@
     },
     "commands": [
       {
-        "command": "vscode-translator.testCommand",
-        "title": "testCommand",
-        "category": "vscode-translator-test"
-      },
-      {
-        "command": "vscode-translator.testWebView",
-        "title": "testWebView",
-        "category": "vscode-translator-test"
-      },
-      {
-        "command": "vscode-translator.testMenus",
-        "title": "testMenus",
-        "category": "vscode-translator-test"
-      },
-      {
-        "command": "vscode-translator.testEditorCommand",
-        "title": "testEditorCommand",
-        "category": "vscode-translator-test"
-      },
-      {
         "command": "vscode-translator.getSelectedText",
         "title": "getSelectedText",
         "category": "vscode-translator"
@@ -77,27 +57,9 @@
     ],
     "keybindings": [],
     "menus": {
-      "explorer/context": [
-        {
-          "group": "navigation",
-          "command": "vscode-translator.testMenus"
-        }
-      ],
-      "editor/context": [
-        {
-          "group": "navigation",
-          "command": "vscode-translator.testMenus",
-          "when": "editorFocus"
-        }
-      ],
-      "editor/title": [
-        {
-          "group": "",
-          "when": "1",
-          "command": "test",
-          "alt": ""
-        }
-      ],
+      "explorer/context": [],
+      "editor/context": [],
+      "editor/title": [],
       "editor/title/context": []
     },
     "snippets": [

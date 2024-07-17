@@ -5,7 +5,6 @@ export class SidebarWebviewViewProvider implements vscode.WebviewViewProvider {
     public static readonly viewId = 'vscode-translator-Sidebar-id';
     constructor(private readonly _extensionPath: vscode.Uri) { }
 
-
     public resolveWebviewView(
         webviewView: vscode.WebviewView,
         context: vscode.WebviewViewResolveContext,
@@ -19,13 +18,6 @@ export class SidebarWebviewViewProvider implements vscode.WebviewViewProvider {
             // vscode.Uri.file(path.join(this._extensionPath, 'dist'))
             localResourceRoots: [vscode.Uri.joinPath(this._extensionPath, 'dist')]
         };
-        console.log(this._extensionPath);
-
-        // const onDiskPath = vscode.Uri.file(
-        //     path.join(this._extensionPath, 'dist', "vue", 'bundle.js')
-        // );
-        // const webviewUri = webviewView.webview.asWebviewUri(onDiskPath);
-
         const icon = webviewView.webview.asWebviewUri(
             vscode.Uri.joinPath(this._extensionPath, 'dist', "vue", 'favicon.ico'));
         const jsapp = webviewView.webview.asWebviewUri(
