@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { outputChannelInstance } from '../log/ChannelLogger';
+import { outputChannelInstance } from '../../log/ChannelLogger';
 
 
 export function provideHover(

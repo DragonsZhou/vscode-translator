@@ -5,11 +5,11 @@ import { outputChannelInstance } from '../log/ChannelLogger';
 
 
 
-import { getSelectedText } from "./SlelctedText";
-import { provideHover } from "./Hover";
+import { getSelectedText } from "./command/SlelctedText";
+import { provideHover } from "./view/Hover";
+import { SidebarWebviewViewProvider } from "./view/SidebarWebviewViewProvider";
 
-
-export function registerCommands(context: ExtensionContext) {
+export function subscriptions(context: ExtensionContext) {
     // 测试
     context.subscriptions.push(
         /* 暴露的命令 */
@@ -41,14 +41,26 @@ export function registerCommands(context: ExtensionContext) {
             (...args: any[]): any => {
                 vscode.window.showInformationMessage('您正在测试WebView！');
                 const panel = vscode.window.createWebviewPanel(
-                    'vscode-translator-testWebView', // 只供内部使用，这个 webview 的标识
+                    'vscode-translator-testWebView-id', // 只供内部使用，这个 webview 的标识
                     'vscode-translator-testWebView', // 给用户显示的面板标题
-                    vscode.ViewColumn.One, // 给新的 webview 面板一个编辑器视图
+                    vscode.ViewColumn.One, // 给新的 webview 面板一个编辑器视图,web视图展示在哪一栏的工作区中
                     {
                         enableScripts: true, // 启用 javascript 脚本
-                        retainContextWhenHidden: true, // 隐藏时保留上下文
+                        retainContextWhenHidden: true, // 隐藏时保留上下文,保证 Webview 所在页面进入后台时不被释放
                     } // webview 面板的内容配置
                 );
+                // And set its HTML content
+                panel.webview.html = `<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Cat Coding</title>
+                    </head>
+                    <body>
+                        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
+                    </body>
+                    </html>`;
             }),
 
         // 该命令必须已在 package.json 文件commands的字段中定义，同时也在menus字段定义
@@ -100,26 +112,21 @@ export function registerCommands(context: ExtensionContext) {
 
 
         /* 视图  注册鼠标悬停提示 */
-        vscode.languages.registerHoverProvider(
-            { pattern: '**' },  //匹配所有文件
-            {
-                provideHover(
-                    document: TextDocument,
-                    position: Position,
-                    token: CancellationToken
-                ): ProviderResult<Hover> {
-                    // // hover开关配置，对typelanguage生效
-                    // const open = confInstance.getConfig<boolean>('hover.enabled');
-                    // if (!open) return null;
-                    return new vscode.Hover('I am a hover!');
-                }
-            }),
+        // vscode.languages.registerHoverProvider(
+        //     { pattern: '**' },  //匹配所有文件
+        //     {
+        //         provideHover(
+        //             document: TextDocument,
+        //             position: Position,
+        //             token: CancellationToken
+        //         ): ProviderResult<Hover> {
+        //             // // hover开关配置，对typelanguage生效
+        //             // const open = confInstance.getConfig<boolean>('hover.enabled');
+        //             // if (!open) return null;
+        //             return new vscode.Hover('I am a hover!');
+        //         }
+        //     }),
     );
-
-
-
-
-
 
 
 
@@ -133,12 +140,20 @@ export function registerCommands(context: ExtensionContext) {
         commands.registerCommand('vscode-translator.getSelectedText', getSelectedText),
     );
 
-    /* 视图  鼠标悬停提示 */
+    /* 视图*/
     context.subscriptions.push(
+        //  鼠标悬停提示 
         vscode.languages.registerHoverProvider(
             { pattern: '**' },  //匹配所有文件
             { provideHover }
         ),
+
+
+        // 侧边栏
+        vscode.window.registerWebviewViewProvider(
+            SidebarWebviewViewProvider.viewId,  // package.json文件views字段孙子元素中的id
+            new SidebarWebviewViewProvider(context.extensionUri)
+        )
     );
 }
 

@@ -1,6 +1,6 @@
 
 import * as vscode from 'vscode';
-import { outputChannelInstance } from '../log/ChannelLogger';
+import { outputChannelInstance } from '../../log/ChannelLogger';
 
 export function getSelectedText(...args: any[]): string {
     let textEditor = vscode.window.activeTextEditor//获取当前激活的编辑框的实例

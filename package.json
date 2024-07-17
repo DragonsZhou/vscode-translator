@@ -22,7 +22,7 @@
   "main": "./dist/extension.js",
   "icon": "images/icon.png",
   "activationEvents": [
-    "onCommand:vscode-translator.sayHello"
+    "onStartupFinished"
   ],
   "contributes": {
     "configuration": {
@@ -107,10 +107,30 @@
       }
     ],
     "viewsContainers": {
-      "activitybar": []
+      "activitybar": [
+        {
+          "id": "vscode-translator-id",
+          "title": "vscode-translator",
+          "icon": ""
+        }
+      ]
     },
     "views": {
-      "beautifulGirl": []
+      "vscode-translator-id": [
+        {
+          "id": "vscode-translator-Sidebar-id",
+          "type": "webview",
+          "name": "translator"
+        },
+        {
+          "id": "Arvinjun-General",
+          "name": "通用"
+        },
+        {
+          "id": "Arvinjun-PackAnalysis",
+          "name": "包分析"
+        }
+      ]
     },
     "iconThemes": []
   },
